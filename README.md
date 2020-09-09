@@ -8,7 +8,8 @@ The repo's name is coming from the Norse mythology, in which [Thor](https://en.w
 
 ### Prerequisites
 
-- [Python 3.8.x](https://www.python.org/) to build, run etc.
+- [Python 3.9.x](https://www.python.org/) to build, run etc.
+- [pip](https://pip.pypa.io/en/stable/) to install dependencies
 - An IDE for development, recommended to use [PyCharm](https://www.jetbrains.com/pycharm/) as there are IDE specific files stored for it in this repo 
 
 ### Run, test, build
