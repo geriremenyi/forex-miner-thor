@@ -1,6 +1,6 @@
 # forex-miner-thor
 
-Tranding engine implementation for forex-miner.com. 
+Trading engine implementation for forex-miner.com. 
 
 The repo's name is coming from the Norse mythology, in which [Thor](https://en.wikipedia.org/wiki/Thor) is a hammer-wielding god associated with thunder, lightning, storms, sacred groves and trees, strength, the protection of mankind and also hallowing and fertility
 
