@@ -1,2 +1,11 @@
 # PyCharm IDE
 .idea
+
+# Locally cached data
+data
+
+# Virtual environment
+venv
+
+# Python cache
+__pycache__/

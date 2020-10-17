@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="com.geriremenyi.forex-miner-thor",
+    name="forex_miner_thor",
     version="0.0.1",
     author="Gergely Reményi",
     author_email="geri@geriremenyi.com",

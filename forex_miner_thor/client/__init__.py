@@ -1,0 +1,2 @@
+from forex_miner_thor.client.client import Client
+from forex_miner_thor.client.instruments_client import InstrumentsClient
