@@ -6,3 +6,6 @@ data
 
 # Virtual environment
 venv
+
+# Python cache
+__pycache__/
