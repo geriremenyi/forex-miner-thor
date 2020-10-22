@@ -1,0 +1,3 @@
+from forex_miner_thor.model.instrument.instrument import Instrument
+from forex_miner_thor.model.instrument.instrument_schema import InstrumentSchema
+

@@ -1,5 +1,0 @@
-from forex_miner_thor.api.tick.tick_instrument import TickInstrument
-from forex_miner_thor.api.tick.tick_instrument_schema import TickInstrumentSchema
-from forex_miner_thor.api.tick.candlestick import Candlestick
-from forex_miner_thor.api.tick.candlestick_schema import CandlestickSchema
-
