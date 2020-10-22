@@ -1,10 +1,15 @@
+from typing import List
+
 from flask import Flask, request, jsonify
 from marshmallow import ValidationError
 
-
+from forex_miner_thor.model.candle import CandleSchema
+from forex_miner_thor.model.instrument import Instrument, InstrumentSchema
+from forex_miner_thor.model.trade import TradeSignalSchema, TradeSignal
 from forex_miner_thor.api.error import ProblemDetailsSchema, ProblemDetails
-from forex_miner_thor.api.tick import TickInstrumentSchema
-from forex_miner_thor.api.trade import TradeSignalSchema, TradeSignal, TradeDirection
+from forex_miner_thor.utilities.add_instrument_data import add_instrument_data
+from forex_miner_thor.strategies import apply_strategies
+
 
 # Setup flask
 api = Flask(__name__)
@@ -14,19 +19,56 @@ api = Flask(__name__)
 @api.route('/api/v1/engine/tick', methods=['POST'])
 def tick():
     if not request.is_json:
-        return ProblemDetailsSchema().dump(ProblemDetails(
-            415, "Only 'application/json' is a supported 'Content-Type'."
-        )), 415
+        return (
+            ProblemDetailsSchema().dump(ProblemDetails(415, "Only 'application/json' is a supported 'Content-Type'.")),
+            415
+        )
 
     try:
-        instruments = TickInstrumentSchema(many=True).load(request.get_json())
-        return jsonify(TradeSignalSchema().dump(TradeSignal(instruments[0].instrument, TradeDirection.LONG, 1.25, 1.30)))
-    except ValidationError as ex:
-        return ProblemDetailsSchema().dump(ProblemDetails(
-            422, ex.messages
-        )), 422
+        # Empty trade signals
+        trade_signals: List[TradeSignal] = []
+
+        # Process instruments and apply strategy on them
+        instruments: List[Instrument] = InstrumentSchema(many=True).load(request.get_json())
+        for inst in instruments:
+            candles = add_instrument_data(inst.instrument, inst.granularity, inst.candles)
+            trade_signal = apply_strategies(inst.instrument, candles)
+            if trade_signal is not None:
+                trade_signals.append(trade_signal)
+
+        # Return trade signals
+        return jsonify(TradeSignalSchema(many=True).dump(trade_signals))
+    except ValidationError as vex:
+        return ProblemDetailsSchema().dump(ProblemDetails(422, vex.messages)), 422
+    except Exception as ex:
+        return ProblemDetailsSchema().dump(ProblemDetails(500, str(ex))), 500
+
+
+# Add instrument data route
+@api.route('/api/v1/engine/instruments/<instrument>/candles/<granularity>', methods=['POST'])
+def post_instrument_granularity_candles(instrument: str, granularity: str):
+    # Error handling on non json data
+    if not request.is_json:
+        return (
+            ProblemDetailsSchema().dump(ProblemDetails(415, "Only 'application/json' is a supported 'Content-Type'.")),
+            415
+        )
+
+    try:
+        # Parse incoming candles
+        candles = CandleSchema(many=True).load(request.get_json())
+
+        # Add data to csv files
+        add_instrument_data(instrument, granularity, candles)
+
+        # Return 201
+        return '', 201
+    except ValidationError as vex:
+        return ProblemDetailsSchema().dump(ProblemDetails(422, vex.messages)), 422
+    except Exception as ex:
+        return ProblemDetailsSchema().dump(ProblemDetails(500, str(ex))), 500
 
 
 # Run API
-api.run()
+api.run(host='0.0.0.0')
 
