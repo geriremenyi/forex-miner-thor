@@ -1,0 +1,20 @@
+# PyCharm IDE
+.idea
+
+# Virtual environment
+venv
+
+# Python cache
+__pycache__/
+
+# Data folder
+data
+
+# Tests
+tests
+
+# Notebooks
+notebooks
+
+# README
+README.md
