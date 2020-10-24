@@ -5,5 +5,5 @@ def ema(data: pd.Series, n: int) -> pd.Series:
     """
     Returns `n`-period exponential moving average of data
     """
-    return data.ewm(n, adjust=False).mean()
+    return pd.Series(data).ewm(n, adjust=False).mean()
 

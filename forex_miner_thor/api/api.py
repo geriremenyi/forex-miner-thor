@@ -15,6 +15,12 @@ from forex_miner_thor.strategies import apply_strategies
 api = Flask(__name__)
 
 
+# Default endpoint just to report back 200
+@api.route('/api/v1/engine', methods=['GET'])
+def report_status():
+    return '', 200
+
+
 # Tick route
 @api.route('/api/v1/engine/tick', methods=['POST'])
 def tick():
@@ -45,7 +51,7 @@ def tick():
 
 
 # Add instrument data route
-@api.route('/api/v1/engine/instruments/<instrument>/candles/<granularity>', methods=['POST'])
+@api.route('/api/v1/engine/instruments/<instrument>/granularities/<granularity>', methods=['POST'])
 def post_instrument_granularity_candles(instrument: str, granularity: str):
     # Error handling on non json data
     if not request.is_json:
@@ -70,5 +76,5 @@ def post_instrument_granularity_candles(instrument: str, granularity: str):
 
 
 # Run API
-api.run(host='0.0.0.0')
+api.run(host='0.0.0.0', port=31001)
 

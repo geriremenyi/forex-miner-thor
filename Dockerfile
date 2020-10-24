@@ -1,9 +1,9 @@
-FROM python:3.8-alpine as base
+FROM python:3.8-buster
 WORKDIR /app
-EXPOSE 5000
+EXPOSE 31001
 
 COPY ./requirements.txt /app/requirements.txt
 RUN pip install -r requirements.txt
-COPY forex_miner_thor /app
+COPY . /app
 
-ENTRYPOINT ["python", "api/apy.py"]
+ENTRYPOINT ["python", "forex_miner_thor/api/api.py"]
