@@ -43,7 +43,7 @@ def tick():
                 trade_signals.append(trade_signal)
 
         # Return trade signals
-        return jsonify(TradeSignalSchema(many=True).dump(trade_signals))
+        return jsonify(TradeSignalSchema(many=True).dump(trade_signals)), 200
     except ValidationError as vex:
         return ProblemDetailsSchema().dump(ProblemDetails(422, vex.messages)), 422
     except Exception as ex:
