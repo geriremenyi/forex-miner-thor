@@ -1,0 +1,1 @@
+from tests.backtesting.ema.ema_strategy_backtesting import EmaStrategyBackTesting

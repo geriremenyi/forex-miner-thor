@@ -2,7 +2,7 @@
 .idea
 
 # Locally cached data
-forex_miner_thor/data
+data
 
 # Virtual environment
 venv

@@ -3,7 +3,7 @@ from pathlib import Path
 
 def get_or_create_instrument_file(instrument: str, granularity: str) -> Path:
     # Data directory
-    data_directory = (Path.cwd() / '..' / 'data').resolve()
+    data_directory = (Path(__file__).parent.resolve() / '..' / '..' / 'data').resolve()
     if not data_directory.is_dir():
         data_directory.mkdir()
 
