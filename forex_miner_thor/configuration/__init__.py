@@ -1,2 +1,0 @@
-from forex_miner_thor.configuration.instruments_configuration import InstrumentsConfiguration
-from forex_miner_thor.configuration.configuration import Configuration
