@@ -21,13 +21,15 @@ class EmaStrategy(Strategy):
     def apply(self) -> Optional[TradeSignal]:
         if (
             self.data.iloc[-2]['10EMA'] < self.data.iloc[-2]['20EMA'] and
-            self.data.iloc[-1]['10EMA'] > self.data.iloc[-1]['20EMA']
+            self.data.iloc[-1]['10EMA'] > self.data.iloc[-1]['20EMA'] and
+            self.data['Volume'].quantile(0.75) <= self.data.iloc[-1]['Volume']
         ):
             return TradeSignal(self.instrument, TradeDirection.LONG, 1)
 
         elif (
                 self.data.iloc[-2]['10EMA'] > self.data.iloc[-2]['20EMA'] and
-                self.data.iloc[-1]['10EMA'] < self.data.iloc[-1]['20EMA']
+                self.data.iloc[-1]['10EMA'] < self.data.iloc[-1]['20EMA'] and
+                self.data['Volume'].quantile(0.75) <= self.data.iloc[-1]['Volume']
         ):
             return TradeSignal(self.instrument, TradeDirection.SHORT, 1)
 
