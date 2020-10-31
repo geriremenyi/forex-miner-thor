@@ -15,10 +15,10 @@ class Candle(object):
         # Currently only support mid for csv serialization
         return {
             'Time': self.time,
+            'Volume': self.volume,
             'Open': self.mid.open,
             'High': self.mid.high,
             'Low': self.mid.low,
             'Close': self.mid.close,
-            'Volume': self.volume,
         }
 
