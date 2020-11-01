@@ -10,6 +10,6 @@ class InstrumentSchema(Schema):
     candles = fields.List(fields.Nested(CandleSchema))
 
     @post_load
-    def make_tick_instrument(self, data,  **kwargs):
+    def make_instrument(self, data,  **kwargs):
         return Instrument(**data)
 
