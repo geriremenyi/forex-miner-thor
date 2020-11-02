@@ -50,7 +50,7 @@ def create_api():
 
     # Add instrument data route
     @api.route('/api/v1/engine/instruments/<instrument>/granularities/<granularity>', methods=['POST'])
-    def post_instrument_granularity_candles(instrument: str, granularity: str):
+    def add_instrument_granularity_candles(instrument: str, granularity: str):
         # Error handling on non json data
         if not request.is_json:
             return (
@@ -76,6 +76,6 @@ def create_api():
 
 
 if __name__ == "__main__":
-    api = create_api()
-    api.run(host='0.0.0.0', port=31001)
+    api_to_run = create_api()
+    api_to_run.run(host='0.0.0.0', port=31001)
 
