@@ -1,7 +1,7 @@
 import pandas as pd
 
 from forex_miner_thor.model.trade import TradeSignal
-from forex_miner_thor.strategies import get_strategies
+from forex_miner_thor.strategies.get_strategies import get_strategies
 
 
 def apply_strategies(instrument: str, data: pd.DataFrame):

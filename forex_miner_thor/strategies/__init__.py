@@ -1,5 +1,2 @@
 from forex_miner_thor.strategies.strategy import Strategy
 
-from forex_miner_thor.strategies.get_strategies import get_strategies
-from forex_miner_thor.strategies.apply_strategies import apply_strategies
-
