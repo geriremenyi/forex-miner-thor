@@ -8,7 +8,7 @@ from forex_miner_thor.model.instrument import Instrument, InstrumentSchema
 from forex_miner_thor.model.trade import TradeSignalSchema, TradeSignal
 from forex_miner_thor.api.error import ProblemDetailsSchema, ProblemDetails
 from forex_miner_thor.utilities.add_instrument_data import add_instrument_data
-from forex_miner_thor.strategies import apply_strategies
+from forex_miner_thor.strategies.apply_strategies import apply_strategies
 
 
 def create_api():
