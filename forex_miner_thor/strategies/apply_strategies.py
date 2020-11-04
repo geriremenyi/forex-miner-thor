@@ -1,3 +1,4 @@
+from typing import Optional
 import pandas as pd
 
 from forex_miner_thor.model.trade import TradeSignal
@@ -6,7 +7,7 @@ from forex_miner_thor.strategies.get_strategies import get_strategies
 
 def apply_strategies(instrument: str, data: pd.DataFrame):
     strategies = get_strategies(instrument, data)
-    final_trade_signal: TradeSignal = None
+    final_trade_signal: Optional[TradeSignal] = None
 
     for strategy in strategies:
         trade_signal = strategy.apply()
