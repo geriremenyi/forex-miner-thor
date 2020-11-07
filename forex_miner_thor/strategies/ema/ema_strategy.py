@@ -8,28 +8,29 @@ from forex_miner_thor.model.trade import TradeSignal, TradeDirection
 
 
 class EmaStrategy(Strategy):
-    n10: int = 10
-    n20: int = 20
+    n1: int = 70
+    n2: int = 180
+    percentile: float = 0.85
 
     def __init__(self, instrument: str, data: pd.DataFrame):
         self.instrument = instrument
         # Precalculate Close price ema for strategy
         self.data = data
-        self.data['10EMA'] = ema(data['Close'], self.n10)  # Close price is used!
-        self.data['20EMA'] = ema(data['Close'], self.n20)  # Close price is used!
+        self.data['N1EMA'] = ema(data['Close'], self.n1)  # Close price is used!
+        self.data['N2EMA'] = ema(data['Close'], self.n2)  # Close price is used!
 
     def apply(self) -> Optional[TradeSignal]:
         if (
-            self.data.iloc[-2]['10EMA'] < self.data.iloc[-2]['20EMA'] and
-            self.data.iloc[-1]['10EMA'] > self.data.iloc[-1]['20EMA'] and
-            self.data['Volume'].quantile(0.75) <= self.data.iloc[-1]['Volume']
+            self.data.iloc[-2]['N1EMA'] < self.data.iloc[-2]['N2EMA'] and
+            self.data.iloc[-1]['N1EMA'] > self.data.iloc[-1]['N2EMA'] and
+            self.data['Volume'].quantile(self.percentile) <= self.data.iloc[-1]['Volume']
         ):
             return TradeSignal(self.instrument, TradeDirection.LONG, 1)
 
         elif (
-                self.data.iloc[-2]['10EMA'] > self.data.iloc[-2]['20EMA'] and
-                self.data.iloc[-1]['10EMA'] < self.data.iloc[-1]['20EMA'] and
-                self.data['Volume'].quantile(0.75) <= self.data.iloc[-1]['Volume']
+                self.data.iloc[-2]['N1EMA'] > self.data.iloc[-2]['N2EMA'] and
+                self.data.iloc[-1]['N1EMA'] < self.data.iloc[-1]['N2EMA'] and
+                self.data['Volume'].quantile(self.percentile) <= self.data.iloc[-1]['Volume']
         ):
             return TradeSignal(self.instrument, TradeDirection.SHORT, 1)
 
