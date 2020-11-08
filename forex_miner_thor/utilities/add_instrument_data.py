@@ -3,8 +3,8 @@ from typing import List
 import pandas as pd
 
 from forex_miner_thor.model.candle import Candle
-from forex_miner_thor.utilities import get_or_create_instrument_file
-from forex_miner_thor.utilities import get_instrument_data
+from forex_miner_thor.utilities.get_or_create_instrument_file import get_or_create_instrument_file
+from forex_miner_thor.utilities.get_instrument_data import get_instrument_data
 
 
 def add_instrument_data(instrument: str, granularity: str, incoming_candles: List[Candle]) -> pd.DataFrame:
