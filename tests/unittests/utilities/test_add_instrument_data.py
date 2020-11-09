@@ -11,18 +11,18 @@ from forex_miner_thor.utilities.add_instrument_data import add_instrument_data
 
 class TestAddInstrumentData(unittest.TestCase):
     def setUp(self) -> None:
-        temp_dir = (Path(__file__).parent.resolve() / '..' / '..' / '..' / 'temp').resolve()
+        temp_dir = (Path(__file__).parent.resolve() / '..' / '..' / 'temp').resolve()
         if not temp_dir.is_dir():
             temp_dir.mkdir()
 
     def tearDown(self) -> None:
-        temp_dir = (Path(__file__).parent.resolve() / '..' / '..' / '..' / 'temp').resolve()
+        temp_dir = (Path(__file__).parent.resolve() / '..' / '..' / 'temp').resolve()
         if temp_dir.is_dir():
             shutil.rmtree(temp_dir)
 
     @staticmethod
     def create_temp_file(file_name) -> Path:
-        temp_dir = (Path(__file__).parent.resolve() / '..' / '..' / '..' / 'temp').resolve()
+        temp_dir = (Path(__file__).parent.resolve() / '..' / '..' / 'temp').resolve()
         temp_file = temp_dir / file_name
         if not temp_file.is_file():
             temp_file.write_text('')

@@ -1,6 +1,6 @@
 import pandas as pd
 
-from forex_miner_thor.utilities import get_or_create_instrument_file
+from forex_miner_thor.utilities.get_or_create_instrument_file import get_or_create_instrument_file
 
 
 def get_instrument_data(instrument: str, granularity: str) -> pd.DataFrame:
