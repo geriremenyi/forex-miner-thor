@@ -9,3 +9,9 @@ venv
 
 # Python cache
 __pycache__/
+
+# Temporary
+tests/temp/
+
+# Test data creation
+data/TEST/

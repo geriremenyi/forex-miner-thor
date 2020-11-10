@@ -5,7 +5,7 @@ from pathlib import Path
 from forex_miner_thor.utilities.get_instrument_data import get_instrument_data
 
 
-class TestAddInstrumentData(unittest.TestCase):
+class TestGetInstrumentData(unittest.TestCase):
     @mock.patch('forex_miner_thor.utilities.get_instrument_data.get_or_create_instrument_file')
     def test_get_instrument_data(self, get_or_create_instrument_file: mock.MagicMock):
         # Arrange
