@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 setuptools.setup(
     name="forex_miner_thor",
     version="0.0.1",
-    author="Gergely Reményi",
+    author="Gergely Remenyi",
     author_email="geri@geriremenyi.com",
     description="Trading engine of the forex-miner.com",
     long_description=long_description,
