@@ -107,12 +107,12 @@ Recently ran deployments can be found [here](https://github.com/geriremenyi/fore
 To create and deploy a new version of the service run the following:
 
 1. Checkout from [develop branch](https://github.com/geriremenyi/forex-miner-thor/tree/master) and create a new release branch
-```shell script
+```bash
 git checkout -b releases/x.y.z
 ```
 
 2. Bump the version
-```shell script
+```bash
 # Bump patch version (x.y.z -> x.y.z+1)
 ./scripts/bump_version patch
 # Bump minor version (x.y.z -> x.y+1.z)
@@ -122,13 +122,13 @@ git checkout -b releases/x.y.z
 ```
 
 3. Commit changes
-```shell script
+```bash
 git add .
 git commit -m "Release x.y.z"
 ```
 
 4. Checkout, update master and merge it to the release branch
-```shell script
+```bash
 git checkout master
 git pull
 git checkout releases/x.y.z
@@ -136,7 +136,7 @@ git merge master --strategy-option ours
 ```
 
 5. Push it to GitHub
-```shell script
+```bash
 git push --set-upstream origin releases/x.y.z
 ```
 
