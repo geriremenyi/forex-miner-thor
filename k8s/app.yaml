@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: forex-miner-thor
-          image: ghcr.io/geriremenyi/forex-miner-thor:latest
+          image: ghcr.io/geriremenyi/forex-miner-thor:0.0.1
           ports:
             - containerPort: 31001
           volumeMounts:
