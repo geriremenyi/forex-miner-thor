@@ -104,6 +104,46 @@ The steps are defined in the [`continuous_deployment.yaml` file](.github/workflo
 
 Recently ran deployments can be found [here](https://github.com/geriremenyi/forex-miner-thor/actions?query=workflow%3A"Continuous+Deployment").
 
+To create and deploy a new version of the service run the following:
+
+1. Checkout from [develop branch](https://github.com/geriremenyi/forex-miner-thor/tree/master) and create a new release branch
+```shell script
+git checkout -b releases/x.y.z
+```
+
+2. Bump the version
+```shell script
+# Bump patch version (x.y.z -> x.y.z+1)
+./scripts/bump_version patch
+# Bump minor version (x.y.z -> x.y+1.z)
+./scripts/bump_version minor
+# Bump major version (x.y.z -> x+1.y.z)
+./scripts/bump_version minor
+```
+
+3. Commit changes
+```shell script
+git add .
+git commit -m "Release x.y.z"
+```
+
+4. Checkout, update master and merge it to the release branch
+```shell script
+git checkout master
+git pull
+git checkout releases/x.y.z
+git merge master --strategy-option ours
+```
+
+5. Push it to GitHub
+```shell script
+git push --set-upstream origin releases/x.y.z
+```
+
+6. Open a PR against the [master](https://github.com/geriremenyi/forex-miner-thor/tree/master) and the [develop](https://github.com/geriremenyi/forex-miner-thor/tree/develop) branch
+
+7. After completing the PR against the master branch the CD workflow kicks in and will deploy the new version
+
 ### Kubernetes Cluster
 
 The kubernetes deployments are defined under the [k8s folder](k8s).
