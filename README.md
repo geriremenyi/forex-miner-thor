@@ -92,7 +92,7 @@ There are continuous integration and deployment steps setup as GitHub actions to
 
 All pull request opened against any branches triggers a continuous integration workflow to run.
 
-The steps are defined in the [`continuous-integration.yaml` file](.github/workflows/continuous-integration.yaml).
+The steps are defined in the [`continuous_integration.yaml` file](.github/workflows/continuous_integration.yaml).
 
 Recently ran integrations can be found [here](https://github.com/geriremenyi/forex-miner-thor/actions?query=workflow%3A"Continuous+Integration").
 
@@ -100,7 +100,7 @@ Recently ran integrations can be found [here](https://github.com/geriremenyi/for
 
 All changes on the [master branch](https://github.com/geriremenyi/forex-miner-thor/tree/master) triggers a deployment to the [kubernetes cluster behind the `forex-miner.com` domain](https://github.com/geriremenyi/forex-miner-asgard).
 
-The steps are defined in the [`continuous-deployment.yaml` file](.github/workflows/continuous-deployment.yaml).
+The steps are defined in the [`continuous_deployment.yaml` file](.github/workflows/continuous_deployment.yaml).
 
 Recently ran deployments can be found [here](https://github.com/geriremenyi/forex-miner-thor/actions?query=workflow%3A"Continuous+Deployment").
 
