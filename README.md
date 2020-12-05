@@ -149,9 +149,10 @@ git push --set-upstream origin releases/x.y.z
 The kubernetes deployments are defined under the [k8s folder](k8s).
 
 There is no external resources required for the engine to run, so it is enough to run the following commands to deploy the engine to any kubernetes cluster.
-1. If not yet created, create a namespace called `forex-miner`
+1. If not yet created, create a namespace called `forex-miner` and add the GitHub Container Registry pull secret to it (can be found in the documentation)
 ```bash
 kubectl create namespace forex-miner
+kubectl create secret ghcr-secret pullsecret --docker-server=https://ghcr.io/ --docker-username=notneeded --docker-password={PULL_SECRET_VALUE}
 ```
 2. Deploy persistent volume
 ```bash
