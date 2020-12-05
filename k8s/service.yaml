@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: forex-miner-thor
+  namespace: forex-miner
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 31001
+  selector:
+    app: forex-miner-thor
