@@ -104,14 +104,55 @@ The steps are defined in the [`continuous_deployment.yaml` file](.github/workflo
 
 Recently ran deployments can be found [here](https://github.com/geriremenyi/forex-miner-thor/actions?query=workflow%3A"Continuous+Deployment").
 
+To create and deploy a new version of the service run the following:
+
+1. Checkout from [develop branch](https://github.com/geriremenyi/forex-miner-thor/tree/master) and create a new release branch
+```bash
+git checkout -b releases/x.y.z
+```
+
+2. Bump the version
+```bash
+# Bump patch version (x.y.z -> x.y.z+1)
+./scripts/bump_version patch
+# Bump minor version (x.y.z -> x.y+1.z)
+./scripts/bump_version minor
+# Bump major version (x.y.z -> x+1.y.z)
+./scripts/bump_version minor
+```
+
+3. Commit changes
+```bash
+git add .
+git commit -m "Release x.y.z"
+```
+
+4. Checkout, update master and merge it to the release branch
+```bash
+git checkout master
+git pull
+git checkout releases/x.y.z
+git merge master --strategy-option ours
+```
+
+5. Push it to GitHub
+```bash
+git push --set-upstream origin releases/x.y.z
+```
+
+6. Open a PR against the [master](https://github.com/geriremenyi/forex-miner-thor/tree/master) and the [develop](https://github.com/geriremenyi/forex-miner-thor/tree/develop) branch
+
+7. After completing the PR against the master branch the CD workflow kicks in and will deploy the new version
+
 ### Kubernetes Cluster
 
 The kubernetes deployments are defined under the [k8s folder](k8s).
 
 There is no external resources required for the engine to run, so it is enough to run the following commands to deploy the engine to any kubernetes cluster.
-1. If not yet created, create a namespace called `forex-miner`
+1. If not yet created, create a namespace called `forex-miner` and add the GitHub Container Registry pull secret to it (can be found in the documentation)
 ```bash
 kubectl create namespace forex-miner
+kubectl create secret ghcr-secret pullsecret --docker-server=https://ghcr.io/ --docker-username=notneeded --docker-password={PULL_SECRET_VALUE}
 ```
 2. Deploy persistent volume
 ```bash
