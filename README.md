@@ -118,7 +118,7 @@ git checkout -b releases/x.y.z
 # Bump minor version (x.y.z -> x.y+1.z)
 ./scripts/bump_version minor
 # Bump major version (x.y.z -> x+1.y.z)
-./scripts/bump_version minor
+./scripts/bump_version major
 ```
 
 3. Commit changes
